@@ -1,2 +1,2 @@
-# spring-boot-rsocket-server
-Example spring boot application using rsocket.
+# spring-boot-rsocket-consumer
+Example spring boot application that consumes a basic rsocket server.
