@@ -14,11 +14,20 @@ public class UserRestController {
     @Autowired
     private RSocketRequester requester;
 
+    @GetMapping("/users")
+    public Publisher<UsersListResponse> getUsers() {
+        UsersListRequest request = new UsersListRequest();
+        return requester
+            .route("getUsers")
+            .data(request)
+            .retrieveMono(UsersListResponse.class);
+    }
+
     @GetMapping("/users/{id}")
     public Publisher<User> getUserById(@PathVariable Integer id) {
         UserRequest request = new UserRequest(id);
         return requester
-            .route("userById")
+            .route("getUserById")
             .data(request)
             .retrieveMono(User.class);
     }
@@ -27,7 +36,7 @@ public class UserRestController {
     public Publisher<User> usersStream() {
         UserStreamRequest request = new UserStreamRequest();
         return requester
-            .route("usersStream")
+            .route("streamRandomUser")
             .data(request)
             .retrieveFlux(User.class);
     }
